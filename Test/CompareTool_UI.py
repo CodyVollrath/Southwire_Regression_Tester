@@ -301,8 +301,9 @@ class Ui_MainWindow(object):
 							delimiter = self.determineDelimiter(line)
 							sch = line.split(delimiter)
 							sch_2 = line2[i].split(delimiter)
-							 
-							if len(self.extractNumbers(sch[6])) > 0 and len(self.extractNumbers(sch_2[6]))>0:
+							sch[6] = self.extractNumbers(sch[6])
+							sch_2[6] = self.extractNumbers(sch_2[6])
+							if len(sch[6]) > 0 and len(sch_2[6])>0:
 								i +=1
 							else:
 								if len(sch[6]) == 0 and len(sch_2[6]) == 0:
@@ -312,7 +313,7 @@ class Ui_MainWindow(object):
 									i+=1
 						else:
 							dataArray.append(self.compareTwoLines(line,str(line2[i])))
-						i+=1
+							i+=1
 				else:
 					dataArray.append(self.compareTwoLines(line,str(line2[i])))
 					i+=1
