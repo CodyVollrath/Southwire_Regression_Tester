@@ -10,6 +10,7 @@ from tkinter import *
 from tkinter import filedialog
 import sys
 import hashlib
+import detect_delimiter
 
 class Ui_MainWindow(object):
 	
@@ -301,13 +302,16 @@ class Ui_MainWindow(object):
 							sch = line.split(delimiter)
 							sch_2 = line2[i].split(delimiter)
 							 
-							if len(sch[6]) > 0 and len(sch_2[6])>0:
+							if len(self.extractNumbers(sch[6])) > 0 and len(self.extractNumbers(sch_2[6]))>0:
 								i +=1
 							else:
 								if len(sch[6]) == 0 and len(sch_2[6]) == 0:
 									i+=1
 								else:
-						dataArray.append(self.compareTwoLines(line,str(line2[i])))
+									dataArray.append(self.compareTwoLines(line,str(line2[i])))
+									i+=1
+						else:
+							dataArray.append(self.compareTwoLines(line,str(line2[i])))
 						i+=1
 				else:
 					dataArray.append(self.compareTwoLines(line,str(line2[i])))
@@ -320,11 +324,11 @@ class Ui_MainWindow(object):
 			self.fileLinesDontAddUpPrompt()
 	
 	#Determines the delimiter by userinput
-	def promptForDelimiterInput(self):
-		delimiter, isOkPressed = QInputDialog.getText(self,"Please Enter Delimiter -",QtWidgets.QLineEdit.Normal,"")
-		if isOkPressed and delimiter != '':
-			return delimiter
-		return '*'
+	def extractNumbers(self,data):
+		data = data[:-1]
+		return data
+	def determineDelimiter(self,lineData):
+		return detect_delimiter.detect(lineData)
 	def compareTwoLines(self,line1,line2):
 		if not line1 == line2:
 			self.countMismatches += 1

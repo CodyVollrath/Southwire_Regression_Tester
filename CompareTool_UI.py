@@ -307,13 +307,7 @@ class Ui_MainWindow(object):
 				self.saveFileData(dataArray)
 		else:
 			self.fileLinesDontAddUpPrompt()
-	
-	#Determines the delimiter by userinput
-	def promptForDelimiterInput(self):
-		delimiter, isOkPressed = QInputDialog.getText(self,"Please Enter Delimiter -",QtWidgets.QLineEdit.Normal,"")
-		if isOkPressed and delimiter != '':
-			return delimiter
-		return '*'
+			
 	def compareTwoLines(self,line1,line2):
 		if not line1 == line2:
 			self.countMismatches += 1
