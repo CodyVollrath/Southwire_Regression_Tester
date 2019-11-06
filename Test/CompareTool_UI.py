@@ -296,6 +296,17 @@ class Ui_MainWindow(object):
 					if 'ISA' in line or 'GS' in line or 'ST' in line or 'SE' in line or 'GE' in line or 'IEA' in line:
 						i +=1
 					else:
+						if 'SCH' in line:
+							delimiter = self.determineDelimiter(line)
+							sch = line.split(delimiter)
+							sch_2 = line2[i].split(delimiter)
+							 
+							if len(sch[6]) > 0 and len(sch_2[6])>0:
+								i +=1
+							else:
+								if len(sch[6]) == 0 and len(sch_2[6]) == 0:
+									i+=1
+								else:
 						dataArray.append(self.compareTwoLines(line,str(line2[i])))
 						i+=1
 				else:
