@@ -7,6 +7,8 @@ There will be two SCH06 elements we will be dealing with, SCH06_1 & SCH06_2
 
 There will be two SCH06 elements we will be dealing with, SCH06_1 & SCH06_2
 PsuedoCode
+
+
 //Make sure that it is populated
 if(SCH06_1.length() > 0 && SCH06_2.length() > 0){
     pass and ignore
