@@ -1,0 +1,23 @@
+Chance Added:
+If SCH06 is populated in the original 846, then it must be populated in the new 846. Don’t compare the data in SCH06, only that it is populated.
+
+If SCH06 is empty in the original 846, then it must be empty in the new 846.
+There will be two SCH06 elements we will be dealing with, SCH06_1 & SCH06_2
+
+
+There will be two SCH06 elements we will be dealing with, SCH06_1 & SCH06_2
+PsuedoCode
+//Make sure that it is populated
+if(SCH06_1.length() > 0 && SCH06_2.length() > 0){
+    pass and ignore
+
+}
+else{
+    if(SCH06_1.length() == 0 && SCH06_2.length() == 0){
+        pass and ignore
+    }
+    else{
+        fail
+    }
+    
+}
