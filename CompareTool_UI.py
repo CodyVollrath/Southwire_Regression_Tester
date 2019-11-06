@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'CompareTool_UI.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
+'''
+@Author Cody Vollrath
+@Version 1.00
+@Company Southwire Company
+'''
 #TODO: Create two find methods and widgits that will allow user to find text they need
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QInputDialog, QLineEdit
