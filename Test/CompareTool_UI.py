@@ -290,33 +290,49 @@ class Ui_MainWindow(object):
 		lineItems = data1.split('\n')
 		lineItems2 = data2.split('\n')
 		if len(lineItems) == len(lineItems2):
-			line2 = lineItems2
-			i = 0
-			for line in lineItems:
+			for index in range(len(lineItems)):
+				line = str(lineItems[index])
+				line2 = str(lineItems2[index])
 				if self.isIgnoreHeaderEnabled():
 					if 'ISA' in line or 'GS' in line or 'ST' in line or 'SE' in line or 'GE' in line or 'IEA' in line:
-						i +=1
+						pass
 					else:
-						if 'SCH' in line:
-							delimiter = self.determineDelimiter(line)
-							sch = line.split(delimiter)
-							sch_2 = line2[i].split(delimiter)
-							sch[6] = self.extractNumbers(sch[6])
-							sch_2[6] = self.extractNumbers(sch_2[6])
-							if len(sch[6]) > 0 and len(sch_2[6])>0:
-								i +=1
-							else:
-								if len(sch[6]) == 0 and len(sch_2[6]) == 0:
-									i+=1
+						#Determine SCH date mismatches based on specifications
+						try:
+							if 'SCH' in line:
+								delimiter = self.determineDelimiter(line)
+								sch = line.split(delimiter)
+								sch_2 = line2.split(delimiter)
+								sch[6] = self.extractNumbers(sch[6])
+								sch_2[6] = self.extractNumbers(sch_2[6])
+								if len(sch[6]) > 0 and len(sch_2[6]) > 0:
+									pass
 								else:
-									dataArray.append(self.compareTwoLines(line,str(line2[i])))
-									i+=1
-						else:
-							dataArray.append(self.compareTwoLines(line,str(line2[i])))
-							i+=1
+									if len(sch[6]) == 0 and len(sch_2[6]) == 0:
+										pass
+									else:
+										dataArray.append(self.compareTwoLines(line,line2))
+							else:
+								if 'DTM' in line:
+									delimiter = self.determineDelimiter(line)
+									dtm = line.split(delimiter)
+									dtm_2 = line2.split(delimiter)
+									dtm[2] = self.extractNumbers(dtm[2])
+									dtm_2[2] = self.extractNumbers(dtm_2[2])
+									if len(dtm[2]) > 0 and len(dtm_2[2]) > 0:
+										pass
+									else:
+										if len(dtm[2]) == 0 and len(dtm_2[2] == 0):
+											pass
+										else:
+											dataArray.append(self.compareTwoLines(line,line2))
+								else:
+									dataArray.append(self.compareTwoLines(line,line2))
+						except:
+							dataArray.append(self.compareTwoLines(line,line2))
 				else:
-					dataArray.append(self.compareTwoLines(line,str(line2[i])))
-					i+=1
+					dataArray.append(self.compareTwoLines(line,line2))
+				#UNIVERSAL CHECKS
 			if self.countMismatches == 0:
 				self.promptMatchConfirmation()
 			else:
