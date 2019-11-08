@@ -1,12 +1,11 @@
 '''
 @Author Cody Vollrath
-@Version 1.00
+@Version 1.10
 @Company Southwire Company
 '''
 #TODO: Create two find methods and widgits that will allow user to find text they need
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QInputDialog, QLineEdit
-from tkinter import *
 from tkinter import filedialog
 import sys
 import hashlib
@@ -226,10 +225,7 @@ class Ui_MainWindow(object):
 			pass
 		self.disableOrEnableButton(self.browseButton_2)
 
-	#PRECONDITION: isSave1 Represents a boolean value, if true is entered into the parameter then overWriteSave will activate, otherwise overWriteSave2 will activate
 	def overWriteSave1or2(self,isSave1):
-		#TODO: Detect change in textArea and ask user to save only if change is found
-		
 		try:
 			if isSave1:
 				self.changedValue = self.getHashOfTextBrowserObject(self.textBrowser_1)
@@ -267,7 +263,6 @@ class Ui_MainWindow(object):
 	def writeFile(self,filename,dataToWrite):
 		with open(filename,'w+') as f:
 			f.write(dataToWrite)
-	
 	def wrap(self):
 		wrapAt = self.wrapEntry.text()
 		replaceText = self.replaceEntry.text()
