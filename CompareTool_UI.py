@@ -1,6 +1,6 @@
 '''
 @Author Cody Vollrath
-@Version 1.00
+@Version 1.10
 @Company Southwire Company
 '''
 #TODO: Create two find methods and widgits that will allow user to find text they need
