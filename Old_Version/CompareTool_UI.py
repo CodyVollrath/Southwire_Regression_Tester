@@ -10,7 +10,6 @@ from tkinter import *
 from tkinter import filedialog
 import sys
 import hashlib
-import detect_delimiter
 
 class Ui_MainWindow(object):
 	
@@ -290,62 +289,25 @@ class Ui_MainWindow(object):
 		lineItems = data1.split('\n')
 		lineItems2 = data2.split('\n')
 		if len(lineItems) == len(lineItems2):
-			for index in range(len(lineItems)):
-				line = str(lineItems[index])
-				line2 = str(lineItems2[index])
+			line2 = lineItems2
+			i = 0
+			for line in lineItems:
 				if self.isIgnoreHeaderEnabled():
 					if 'ISA' in line or 'GS' in line or 'ST' in line or 'SE' in line or 'GE' in line or 'IEA' in line:
-						pass
+						i +=1
 					else:
-						#Determine SCH date mismatches based on specifications
-						try:
-							if 'SCH' in line:
-								delimiter = self.determineDelimiter(line)
-								sch = line.split(delimiter)
-								sch_2 = line2.split(delimiter)
-								sch[6] = self.extractNumbers(sch[6])
-								sch_2[6] = self.extractNumbers(sch_2[6])
-								if len(sch[6]) > 0 and len(sch_2[6]) > 0:
-									pass
-								else:
-									if len(sch[6]) == 0 and len(sch_2[6]) == 0:
-										pass
-									else:
-										dataArray.append(self.compareTwoLines(line,line2))
-							else:
-								if 'DTM' in line:
-									delimiter = self.determineDelimiter(line)
-									dtm = line.split(delimiter)
-									dtm_2 = line2.split(delimiter)
-									dtm[2] = self.extractNumbers(dtm[2])
-									dtm_2[2] = self.extractNumbers(dtm_2[2])
-									if len(dtm[2]) > 0 and len(dtm_2[2]) > 0:
-										pass
-									else:
-										if len(dtm[2]) == 0 and len(dtm_2[2] == 0):
-											pass
-										else:
-											dataArray.append(self.compareTwoLines(line,line2))
-								else:
-									dataArray.append(self.compareTwoLines(line,line2))
-						except:
-							dataArray.append(self.compareTwoLines(line,line2))
+						dataArray.append(self.compareTwoLines(line,str(line2[i])))
+						i+=1
 				else:
-					dataArray.append(self.compareTwoLines(line,line2))
-				#UNIVERSAL CHECKS
+					dataArray.append(self.compareTwoLines(line,str(line2[i])))
+					i+=1
 			if self.countMismatches == 0:
 				self.promptMatchConfirmation()
 			else:
 				self.saveFileData(dataArray)
 		else:
 			self.fileLinesDontAddUpPrompt()
-	
-	#Determines the delimiter by userinput
-	def extractNumbers(self,data):
-		data = data[:-1]
-		return data
-	def determineDelimiter(self,lineData):
-		return detect_delimiter.detect(lineData)
+			
 	def compareTwoLines(self,line1,line2):
 		if not line1 == line2:
 			self.countMismatches += 1
