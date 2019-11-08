@@ -1,1 +1,10 @@
 Updates: 
+ Added the ability to distinguish delimiters automatically
+ 
+ Added the ability to identify SCH and DTM segments when the
+ ignore envelope check box is checked
+
+When DTM and SCH documents are identified, the SCH06 and DTM02 will be 
+compared only when they one of the two that are being compared is empty or populated. 
+
+So if SCH06_1 is empty but SCH06_2 is populated it will flag as a mismatch and vice versa (This applies to DTM02 as well)
